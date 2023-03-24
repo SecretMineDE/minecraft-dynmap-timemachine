@@ -1,2 +1,4 @@
 Pillow
 requests
+tqdm
+p_tqdm

@@ -30,6 +30,7 @@ if __name__ == '__main__':
     parser.add_argument('-q', '--quiet', action='store_true')
     parser.add_argument('-v', '--verbose', action='store_true')
     parser.add_argument('-vv', '--verbose-debug', action='store_true')
+    parser.add_argument('-j', '--threads', default='4')
 
     args = parser.parse_args()
 
@@ -87,7 +88,8 @@ if __name__ == '__main__':
         tm = time_machine.TimeMachine(dm)
         dest = args.dest
         zoom = int(args.zoom)
-        img = tm.capture_single(dm_map, m_loc.to_tile_location(zoom), size)
+        threads = int(args.threads)
+        img = tm.capture_single(dm_map, m_loc.to_tile_location(zoom), size, threads)
 
         if os.path.isdir(dest):
             files = list(glob.iglob(os.path.join(dest, '*.png')))
